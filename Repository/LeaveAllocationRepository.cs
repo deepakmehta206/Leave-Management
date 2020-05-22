@@ -1,11 +1,12 @@
-﻿using Leave_Management.Data;
+﻿using Leave_Management.Contracts;
+using Leave_Management.Data;
 using Leave_Management.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Leave_Management.Contracts
+namespace Leave_Management.Repository
 {
     public class LeaveAllocationRepository : ILeaveAllocationRepository
     {
@@ -36,6 +37,12 @@ namespace Leave_Management.Contracts
         {
             var leaveAllocation = _db.LeaveAllocations.Find(id);
             return leaveAllocation;
+        }
+
+        public bool isExists(int id)
+        {
+            var exists = _db.LeaveHistories.Any(q => q.Id == id);
+            return exists;
         }
 
         public bool Save()

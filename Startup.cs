@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Leave_Management.Contracts;
 using Leave_Management.Repository;
 using AutoMapper;
+using Leave_Management.Mapping;
 
 namespace Leave_Management
 {
