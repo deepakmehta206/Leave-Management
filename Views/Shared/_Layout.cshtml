@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,17 +30,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Apply For Leave</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "href="#" id="navBarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu bg-dark" aria-labelledby="navBarDropdownMenuLink">
-                                <a class="dropdown-item text-white" asp-controller="LeaveType" asp-action="Index">Leave Type</a>
-                                <a class="dropdown-item text-white" href="#">Leave Allocation</a>
-                                <a class="dropdown-item text-white" href="#">Leave Applications</a>
-                                <a class="dropdown-item text-white" href="#">Employee</a>
-                            </div>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.IsInRole("Administrator"))
+                            {
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle " href="#" id="navBarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage
+                                    </a>
+                                    <div class="dropdown-menu bg-dark" aria-labelledby="navBarDropdownMenuLink">
+                                        <a class="dropdown-item text-white" asp-controller="LeaveType" asp-action="Index">Leave Type</a>
+                                        <a class="dropdown-item text-white" href="#">Leave Allocation</a>
+                                        <a class="dropdown-item text-white" href="#">Leave Applications</a>
+                                        <a class="dropdown-item text-white" href="#">Employee</a>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
